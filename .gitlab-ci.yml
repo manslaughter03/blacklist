@@ -1,0 +1,45 @@
+image: golang:1.11-alpine3.7
+
+cache:
+  paths:
+    - /var/cache/apk/
+    - /go/src/github.com
+    - /go/src/golang.org
+    - /go/src/google.golang.org
+    - /go/src/gopkg.in
+
+before_script:
+  - apk --update add make git gcc libc-dev
+  - go get -u golang.org/x/lint/golint
+
+test:
+  stage: test
+  script:
+    - make test-ci
+
+examples:
+  stage: test
+  script :
+    - make examples
+
+#race:
+  #stage: test
+  #before_script:
+    #- apk --no-cache add ca-certificates wget
+    #- wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+    #- wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk
+    #- apk add glibc-2.28-r0.apk
+  #script:
+    #- make race
+
+coverage:
+  stage: test
+  script:
+    - make cover-ci
+  only:
+    - master
+
+lint:
+  stage: test
+  script:
+    - make lint
