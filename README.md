@@ -9,7 +9,7 @@ package main
 import (
   "log"
 
-  "banks/blacklist"
+	"git.hydra-project.io/banks/blacklist"
 )
 
 func main() {
