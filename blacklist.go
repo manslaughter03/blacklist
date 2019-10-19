@@ -106,6 +106,7 @@ func CheckBlackList(ip, dnsTest string) bool {
 	return false
 }
 
+// reverse array
 func reverse(numbers []string) []string {
 	newNumbers := make([]string, len(numbers))
 	for i, j := 0, len(numbers)-1; i < j; i, j = i+1, j-1 {

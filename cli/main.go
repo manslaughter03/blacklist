@@ -16,12 +16,14 @@ var (
 	verbose *bool
 )
 
+// Usage function
 func Usage() {
 	fmt.Fprintf(os.Stderr, "Usage of %s [<ip>]:\n", os.Args[0])
 	flag.PrintDefaults()
 	os.Exit(0)
 }
 
+// Entrypoint
 func main() {
 	var err error
 	inputFile := flag.String("input-file", "", "Input with the list of ip to check")
@@ -85,6 +87,7 @@ func main() {
 	}
 }
 
+// Summary funcion
 func Summary(results map[string]blacklist.Result) string {
 	var resume string
 	resume += "----------------------------------------------------\n"
